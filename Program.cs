@@ -2,7 +2,7 @@
     {
         Console.Write("Pre pomoc s vyhladanim prikazov zadaj 'help': ");
         string prikaz = Console.ReadLine();
-        
+
         if (prikaz == "exit")
         {
             Console.WriteLine("Asistent ukonceny");
@@ -23,8 +23,23 @@
         {
             find();
         }
-        
-        void sum()
+
+        if (prikaz == "rect")
+        {
+            rect();
+        }
+
+        if (prikaz == "help")
+        {
+            Console.WriteLine("Podporovane prikazy:");
+            Console.WriteLine("sum  - scitanie dvoch celych cisel");
+            Console.WriteLine("odm  - druha odmocnina zo zadaneho cisla");
+            Console.WriteLine("find - hladanie podretazca vo vete a výpis jeho pozicie");
+            Console.WriteLine("rect  - zapne mod merania obdlznika (dalsie funckie ak napises 'rect'");
+            Console.WriteLine("help - zobrazenie tohto zoznamu prikazov");
+            Console.WriteLine("exit - ukoncenie programu");
+        }
+     void sum()
             {
                 Console.WriteLine("Napis cislo 1");
                 int cislo1 = Convert.ToInt32(Console.ReadLine());
@@ -70,22 +85,60 @@
                 Console.WriteLine($"Podretazec '{slovo}' sa vo vete nenachadza.");
             }
         }
-
+        
         void rect()
         {
             Console.WriteLine("Odmeraj obdlznik: ");
             Console.WriteLine("Napis dlzku prvej strany: ");
             int strana1 = Convert.ToInt32(Console.ReadLine());
-            
+
             Console.WriteLine("Napis dlzku druhej strany");
             int strana2 = Convert.ToInt32(Console.ReadLine());
-            
+
             Console.WriteLine("Co potrebujes odmerat?: ");
-            void area()
+            Console.Write("Pre pomoc s vyhladanim prikazov zadaj 'help': ");
+            string prikazRect = Console.ReadLine();
+
+            if (prikazRect == "area")
             {
-                
+                area(strana1, strana2);
             }
-        }
-    } 
+
+            if (prikazRect == "obvod")
+            {
+                obvod(strana1, strana2);
+            }
+
+            if (prikazRect == "uhlopriecka")
+            {
+                uhlopriecka(strana1, strana2);
+            }
+
+            void area(int dlzka, int sirka)
+            {
+                int vypocetArei = dlzka * sirka;
+                Console.WriteLine("Obsah obldznika je: " + vypocetArei + " .");
+            }
+
+            void obvod(int dlzka, int sirka)
+            {
+                int vypocetObvodu = (dlzka + sirka)*2;
+                Console.WriteLine("Obvod obldznika je: " + vypocetObvodu + " .");
+            }
+
+            void uhlopriecka(int dlzka, int sirka)
+            {
+                double pytagorovaVeta = Math.Sqrt((sirka * sirka) * (dlzka * dlzka));
+                Console.WriteLine("Uhlopriecka tohoto obdlznika je: "+pytagorovaVeta+" .");
+            }
+            
+         }
+        
+        
+        
+           
+        
+        
+    }
         
         
