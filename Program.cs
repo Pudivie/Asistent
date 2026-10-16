@@ -34,13 +34,7 @@
 
         if (prikaz == "help")
         {
-            Console.WriteLine("Podporovane prikazy:");
-            Console.WriteLine("sum  - scitanie dvoch celych cisel");
-            Console.WriteLine("odm  - druha odmocnina zo zadaneho cisla");
-            Console.WriteLine("find - hladanie podretazca vo vete a výpis jeho pozicie");
-            Console.WriteLine("rect  - zapne mod merania obdlznika (dalsie funckie ak napises 'rect'");
-            Console.WriteLine("help - zobrazenie tohto zoznamu prikazov");
-            Console.WriteLine("exit - ukoncenie programu");
+           help();
         }
 
         void sum()
@@ -88,6 +82,17 @@
             {
                 Console.WriteLine($"Podretazec '{slovo}' sa vo vete nenachadza.");
             }
+        }
+
+        void help()
+        {
+            Console.WriteLine("Podporovane prikazy:");
+            Console.WriteLine("sum  - scitanie dvoch celych cisel");
+            Console.WriteLine("odm  - druha odmocnina zo zadaneho cisla");
+            Console.WriteLine("find - hladanie podretazca vo vete a výpis jeho pozicie");
+            Console.WriteLine("rect  - zapne mod merania obdlznika (dalsie funckie ak napises 'rect'");
+            Console.WriteLine("help - zobrazenie tohto zoznamu prikazov");
+            Console.WriteLine("exit - ukoncenie programu");   
         }
             void rect()
             {
