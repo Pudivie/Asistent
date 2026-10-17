@@ -1,182 +1,195 @@
-﻿void asistent()
+﻿using System;
+
+class Program
 {
-    while (true)
+    static void Main()
     {
-        Console.WriteLine("Ahoj, vitaj v mojom pocitacom Asistentovi. Zadaj funkciu, ktoru si prajes mat splnenu.");
-        Console.Write("(Pre pomoc s vyhladanim prikazov zadaj 'help'): ");
-        string prikaz = Console.ReadLine();
+        Asistent();
+    }
 
-        if (prikaz == "exit")
+    static void Asistent()
+    {
+        while (true)
         {
-            Console.WriteLine("Asistent ukonceny");
-            break;
-        }
+            Console.WriteLine("Ahoj, vitaj v mojom pocitacom Asistentovi. Zadaj funkciu, ktoru si prajes mat splnenu.");
+            Console.Write("(Pre pomoc s vyhladanim prikazov zadaj 'help'): ");
+            string prikaz = Console.ReadLine()?.ToLower();
 
-        if (prikaz == "sum")
-        {
-            sum();
-        }
-
-        if (prikaz == "odm")
-        {
-            odm();
-        }
-
-        if (prikaz == "find")
-        {
-            find();
-        }
-
-        if (prikaz == "rect")
-        {
-            rect();
-        }
-
-        if (prikaz == "help")
-        {
-           help();
-        }
-
-        void sum()
-        {
-            Console.WriteLine("Napis cislo 1");
-            int cislo1 = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Napis cislo 2");
-            int cislo2 = Convert.ToInt32(Console.ReadLine());
-
-            int vysledok = cislo1 + cislo2;
-            Console.WriteLine($"Vysledok scitanie je {vysledok}");
-        }
-
-        void odm()
-        {
-            Console.WriteLine("Napis cislo ");
-            int cislo = Convert.ToInt32(Console.ReadLine());
-
-            if (cislo < 0)
+            if (prikaz == "exit")
             {
-                Console.WriteLine("Zaporne cislo sa neda odmocnit");
+                Console.WriteLine("Asistent ukonceny.");
+                break;
             }
-
-            else
+            else if (prikaz == "sum")
             {
-                double vysledok = Math.Sqrt(cislo);
-                Console.WriteLine($"Odmocnina z cisla {cislo} je: {vysledok}");
+                VykonajSum();
             }
-        }
-
-        void find()
-        {
-            Console.WriteLine("Napis vetu");
-            string veta = Console.ReadLine();
-            Console.WriteLine("Napis ake slovo chces najst");
-            string slovo = Console.ReadLine();
-
-            int pozicia = veta.IndexOf(slovo);
-
-            if (pozicia != -1)
+            else if (prikaz == "odm")
             {
-                Console.WriteLine($"Hladany podretazec sa vo vete nachadza na pozicii {pozicia + 1}.");
+                VykonajOdm();
+            }
+            else if (prikaz == "find")
+            {
+                VykonajFind();
+            }
+            else if (prikaz == "rect")
+            {
+                VykonajRect();
+            }
+            else if (prikaz == "help")
+            {
+                VykonajHelp();
             }
             else
             {
-                Console.WriteLine($"Podretazec '{slovo}' sa vo vete nenachadza.");
+                Console.WriteLine("Neznamy prikaz. Zadaj 'help' pre zoznam prikazov.");
             }
-        }
-
-        void help()
-        {
-            Console.WriteLine("Podporovane prikazy:");
-            Console.WriteLine("sum  - scitanie dvoch celych cisel");
-            Console.WriteLine("odm  - druha odmocnina zo zadaneho cisla");
-            Console.WriteLine("find - hladanie podretazca vo vete a výpis jeho pozicie");
-            Console.WriteLine("rect  - zapne mod merania obdlznika (dalsie funckie ak napises 'rect'");
-            Console.WriteLine("help - zobrazenie tohto zoznamu prikazov");
-            Console.WriteLine("exit - ukoncenie programu");   
-        }
-            void rect()
-            {
-                while (true)
-                {
-                Console.WriteLine("Vypisanim 2 stran vytvoris obdlznik.");
-                Console.WriteLine("Napis dlzku prvej strany: ");
-                int strana1 = Convert.ToInt32(Console.ReadLine());
-
-                Console.WriteLine("Napis dlzku druhej strany: ");
-                int strana2 = Convert.ToInt32(Console.ReadLine());
-
-                string pouzitiePrikazu = prikazRect();
-                string prikazRect()
-                {
-                    Console.WriteLine("Co potrebujes odmerat?");
-                    Console.Write("(Pre pomoc s vyhladanim prikazov zadaj 'help'): ");
-                    string prikaz = Console.ReadLine();
-                    return prikaz;
-                }
-
-                if (pouzitiePrikazu == "obsah")
-                {
-                    obsah(strana1, strana2);
-                    prikazRect();
-                }
-
-                if (pouzitiePrikazu == "obvod")
-                {
-                    obvod(strana1, strana2);
-                    prikazRect();
-                }
-
-                if (pouzitiePrikazu == "uhlopriecka")
-                {
-                    uhlopriecka(strana1, strana2);
-                    prikazRect();
-                }
-                if (pouzitiePrikazu == "help")
-                {
-                    Console.WriteLine("Podporovane prikazy:");
-                    Console.WriteLine("obsah - vypocita ti obsah zo zadanych stran obdlznika");
-                    Console.WriteLine("obvod - vypocita ti obvod zo zadanych stran obdlznika");
-                    Console.WriteLine("uhlopriecka - vypocita ti uhlopriecku zo zadanych stran obdlznika");
-                    Console.WriteLine("help - zobrazenie tohto zoznamu prikazov");
-                    Console.WriteLine("exit - ukoncenie funkcie rect");
-                    prikazRect();
-                }
-
-                if (pouzitiePrikazu == "exit")
-                {
-                    Console.WriteLine("Funkcia obdlznika ukoncena.");
-                    asistent();
-                    break;
-                }
-
-                void obsah(int dlzka, int sirka)
-                    {
-                        int vypocetObsahu = dlzka * sirka;
-                        Console.WriteLine("Obsah obldznika je: " + vypocetObsahu + " .");
-                    }
-
-                void obvod(int dlzka, int sirka)
-                    {
-                        int vypocetObvodu = (dlzka + sirka) * 2;
-                        Console.WriteLine("Obvod obldznika je: " + vypocetObvodu + " .");
-                    }
-
-                void uhlopriecka(int dlzka, int sirka)
-                    {
-                        double pytagorovaVeta = Math.Sqrt((sirka * sirka) * (dlzka * dlzka));
-                        Console.WriteLine("Uhlopriecka tohoto obdlznika je: " + pytagorovaVeta + " .");
-                    }
-
-                }
-            }
-
-
-
-
-
         }
     }
 
-asistent();
-        
-        
+    static void VykonajSum()
+    {
+        Console.Write("Napis cislo 1: ");
+        if (!double.TryParse(Console.ReadLine(), out double cislo1))
+        {
+            Console.WriteLine("Neplatny vstup.");
+            return;
+        }
+
+        Console.Write("Napis cislo 2: ");
+        if (!double.TryParse(Console.ReadLine(), out double cislo2))
+        {
+            Console.WriteLine("Neplatny vstup.");
+            return;
+        }
+
+        double vysledok = cislo1 + cislo2;
+        Console.WriteLine("Vysledok scitania:"+cislo1+"+"+cislo2+"je:" +vysledok);
+    }
+
+    static void VykonajOdm()
+    {
+        Console.Write("Napis cislo: ");
+        if (!double.TryParse(Console.ReadLine(), out double cislo))
+        {
+            Console.WriteLine("Neplatny vstup.");
+            return;
+        }
+
+        if (cislo < 0)
+        {
+            Console.WriteLine("Zaporne cislo sa neda odmocnit.");
+        }
+        else
+        {
+            double vysledok = Math.Sqrt(cislo);
+            Console.WriteLine($"Odmocnina z cisla {cislo} je: {vysledok}");
+        }
+    }
+
+    static void VykonajFind()
+    {
+        Console.Write("Napis vetu: ");
+        string veta = Console.ReadLine() ?? "";
+        Console.Write("Napis ake slovo chces najst: ");
+        string slovo = Console.ReadLine() ?? "";
+
+        int pozicia = veta.IndexOf(slovo);
+
+        if (pozicia != -1)
+        {
+            Console.WriteLine("Hladany podretazec sa vo vete nachadza na pozicii"+pozicia + 1);
+        }
+        else
+        {
+            Console.WriteLine("Podretazec"+slovo+" sa vo vete nenachadza.");
+        }
+    }
+
+    static void VykonajHelp()
+    {
+        Console.WriteLine("Podporovane prikazy:");
+        Console.WriteLine("sum  - scitanie dvoch cisel");
+        Console.WriteLine("odm  - druha odmocnina zo zadaneho cisla");
+        Console.WriteLine("find - hladanie podretazca vo vete a vypis jeho pozicie");
+        Console.WriteLine("rect - zapne mod merania obdlznika");
+        Console.WriteLine("help - zobrazenie tohto zoznamu prikazov");
+        Console.WriteLine("exit - ukoncenie programu");
+    }
+
+    static void VykonajRect()
+    {
+        Console.WriteLine("Vypisanim 2 stran vytvoris obdlznik.");
+
+        Console.Write("Napis dlzku prvej strany: ");
+        if (!double.TryParse(Console.ReadLine(), out double strana1) || strana1 <= 0)
+        {
+            Console.WriteLine("Neplatna strana obdlznika (musi byt cislo vacsie ako 0).");
+            return;
+        }
+
+        Console.Write("Napis dlzku druhej strany: ");
+        if (!double.TryParse(Console.ReadLine(), out double strana2) || strana2 <= 0)
+        {
+            Console.WriteLine("Neplatna strana obdlznika (musi byt cislo vacsie ako 0).");
+            return;
+        }
+
+        Console.WriteLine("Mame obdlznik s rozmermi"+strana1+"x"+strana2);
+
+        while (true)
+        {
+            Console.Write("Co potrebujes odmerat? (area / perimeter / diagonal / help / exit): ");
+            string prikaz = Console.ReadLine()?.ToLower();
+
+            if (prikaz == "exit")
+            {
+                Console.WriteLine("Funkcia obdlznika ukoncena.");
+                break;
+            }
+            else if (prikaz == "area" || prikaz == "obsah")
+            {
+                double vysledok = VypocitajObsah(strana1, strana2);
+                Console.WriteLine("Obsah obdlznika s rozmermi"+strana1+"x"+strana2+"je:" +vysledok);
+            }
+            else if (prikaz == "perimeter" || prikaz == "obvod")
+            {
+                double vysledok = VypocitajObvod(strana1, strana2);
+                Console.WriteLine("Obvod obdlznika s rozmermi"+strana1+"x"+strana2+"je:" +vysledok);
+            }
+            else if (prikaz == "diagonal" || prikaz == "uhlopriecka")
+            {
+                double vysledok = VypocitajUhlopriecku(strana1, strana2);
+                Console.WriteLine("Uhlopriecka obdlznika s rozmermi"+strana1+"x"+strana2+"je:" +vysledok);
+            }
+            else if (prikaz == "help")
+            {
+                Console.WriteLine("Podporovane prikazy pre obdlznik:");
+                Console.WriteLine("area (obsah)       - vypocita obsah obdlznika");
+                Console.WriteLine("perimeter (obvod)  - vypocita obvod obdlznika");
+                Console.WriteLine("diagonal (uhlopriecka) - vypocita dĺžku uhlopriečky");
+                Console.WriteLine("help               - zobrazi tuto pomoc");
+                Console.WriteLine("exit               - opusti mod obdlznika");
+            }
+            else
+            {
+                Console.WriteLine("Neznamy prikaz v mode rect. Zadaj 'help'.");
+            }
+        }
+    }
+    
+    static double VypocitajObsah(double dlzka, double sirka)
+    {
+        return dlzka * sirka;
+    }
+
+    static double VypocitajObvod(double dlzka, double sirka)
+    {
+        return 2 * (dlzka + sirka);
+    }
+
+    static double VypocitajUhlopriecku(double dlzka, double sirka)
+    {
+        return Math.Sqrt(dlzka * dlzka + sirka * sirka);
+    }
+}
