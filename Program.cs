@@ -1,12 +1,4 @@
-﻿using System;
-
-class Program
-{
-    static void Main()
-    {
-        Asistent();
-    }
-
+﻿Asistent();
     static void Asistent()
     {
         while (true)
@@ -83,7 +75,7 @@ class Program
         else
         {
             double vysledok = Math.Sqrt(cislo);
-            Console.WriteLine($"Odmocnina z cisla {cislo} je: {vysledok}");
+            Console.WriteLine("Odmocnina z cisla"+cislo+" je:"+vysledok);
         }
     }
 
@@ -98,11 +90,11 @@ class Program
 
         if (pozicia != -1)
         {
-            Console.WriteLine("Hladany podretazec sa vo vete nachadza na pozicii"+pozicia + 1);
+            Console.WriteLine("Hladany podretazec sa vo vete nachadza na pozicii "+pozicia + 1);
         }
         else
         {
-            Console.WriteLine("Podretazec"+slovo+" sa vo vete nenachadza.");
+            Console.WriteLine("Podretazec '"+slovo+"' sa vo vete nenachadza.");
         }
     }
 
@@ -135,7 +127,7 @@ class Program
             return;
         }
 
-        Console.WriteLine("Mame obdlznik s rozmermi"+strana1+"x"+strana2);
+        Console.WriteLine("Mame obdlznik s rozmermi "+strana1+" x "+strana2);
 
         while (true)
         {
@@ -192,4 +184,119 @@ class Program
     {
         return Math.Sqrt(dlzka * dlzka + sirka * sirka);
     }
-}
+    
+    static void VykonajArray()
+    {
+        Console.WriteLine("Zadaj ciselne pole (cisla oddelene medzerou):");
+        Console.Write("> ");
+        string vstup = Console.ReadLine();
+
+        string[] casti = vstup.Split(' ');
+
+        if (casti.Length == 0)
+        {
+            Console.WriteLine("Zadal si prazdne pole.");
+            return;
+        }
+
+        int[] pole = new int[casti.Length];
+        for (int i = 0; i < casti.Length; i++)
+        {
+            if (int.TryParse(casti[i], out pole[i]))
+            {
+                Console.WriteLine("Chyba: '" + casti[i] + "' nie je platne cele cislo.");
+                return;
+            }
+        }
+
+        while (true)
+        {
+            Console.Write("Co chces urobit? (find / min / sort / help / exit): ");
+            string prikaz = Console.ReadLine();
+            prikaz = prikaz.ToLower();
+
+            if (prikaz == "exit")
+            {
+                Console.WriteLine("Mod prace s polom ukonceny.");
+                break;
+            }
+            else if (prikaz == "find")
+            {
+                Console.Write("Ake cislo chces najst?\n> ");
+                string textHladane = Console.ReadLine();
+                if (int.TryParse(textHladane, out int hladaneCislo))
+                {
+                    NajdiVPoli(pole, hladaneCislo);
+                }
+                else
+                {
+                    Console.WriteLine("Neplatne cislo.");
+                }
+            }
+            else if (prikaz == "min")
+            {
+                int minHodnota = NajdiMin(pole);
+                Console.WriteLine("Najmensia hodnota v poli je: " + minHodnota);
+            }
+            else if (prikaz == "sort")
+            {
+                ZoradPole(pole);
+                string zoznamPola = string.Join(" ", pole);
+                Console.WriteLine("Zoradil som pre teba pole. Teraz vypada takto: " + zoznamPola);
+            }
+            else if (prikaz == "help")
+            {
+                Console.WriteLine("Podporovane prikazy pre pole:");
+                Console.WriteLine("find - najde zadanu hodnotu v poli a vypise jej poziciu");
+                Console.WriteLine("min  - najde najmensiu hodnotu v poli");
+                Console.WriteLine("sort - zoradi pole od najmensej po najvacsiu hodnotu");
+                Console.WriteLine("help - zobrazi tuto pomoc");
+                Console.WriteLine("exit - opusti mod pola");
+            }
+            else
+            {
+                Console.WriteLine("Neznamy prikaz v mode array. Zadaj 'help'.");
+            }
+        }
+    }
+
+    static void NajdiVPoli(int[] pole, int cislo)
+    {
+        int index = -1;
+        for (int i = 0; i < pole.Length; i++)
+        {
+            if (pole[i] == cislo)
+            {
+                index = i;
+                break;
+            }
+        }
+
+        if (index != -1)
+        {
+            int pozicia = index + 1;
+            Console.WriteLine("Hodnota "+cislo+" sa v poli nachadza na pozicii "+pozicia+".");
+        }
+        else
+        {
+            Console.WriteLine("Hodnota "+cislo+" sa v poli nenachadza.");
+        }
+    }
+
+    static int NajdiMin(int[] pole)
+    {
+        int min = pole[0];
+        for (int i = 1; i < pole.Length; i++)
+        {
+            if (pole[i] < min)
+            {
+                min = pole[i];
+            }
+        }
+        return min;
+    }
+
+    static void ZoradPole(int[] pole)
+    {
+        Array.Sort(pole);
+    }
